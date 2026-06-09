@@ -1,1 +1,42 @@
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agro Sustentável & Futuro</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #2d3436; background: #f9fbf9; padding: 20px; transition: 0.2s; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; border-left: 8px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .acessibilidade { margin-bottom: 20px; text-align: right; }
+        button { background: #2ecc71; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #27ae60; }
+        .quiz { background: #e8f5e9; padding: 20px; border-radius: 10px; margin-top: 20px; }
+        #feedback { font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="acessibilidade">
+            <span>Tamanho da letra: </span>
+            <button onclick="mudarFonte(2)">A+</button>
+            <button onclick="mudarFonte(-2)">A-</button>
+        </div>
+        
+        <h1>Manual: Agro Forte e Sustentável</h1>
+        <p>A produção sustentável une tecnologia AgTech e preservação. O uso de drones e sensores permite o equilíbrio entre produtividade e meio ambiente.</p>
+        
+        <div class="quiz">
+            <h3>Mini Quiz Tecnológico</h3>
+            <p>Qual tecnologia ajuda a economizar água e defensivos?</p>
+            <button onclick="verificar(true)">Drones e Sensores</button>
+            <button onclick="verificar(false)">Arados Tradicionais</button>
+            <div id="feedback"agoraComputedStyle(document.body).fontSize;
+            document.body.style.fontSize = (parseFloat(s) + n) + 'px';
+        }
+        function verificar(c) {
+            const f = document.getElementById('feedback');
+            f.innerText = c ? "Correto! 🌱" : "Tente novamente! ❌";
+            f.style.color = c ? "#27ae60" : "#e74c3c";
+        }
+    </script>
+</body>
+</html>
