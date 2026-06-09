@@ -1,196 +1,90 @@
-/* Configurações Globais e Variáveis de Cores */
-:root {
-    --cor-fundo: #f4f7f5;
-    --cor-texto: #2c3e50;
-    --cor-principal: #2e7d32; /* Verde Agro */
-    --cor-secundaria: #388e3c;
-    --cor-card-fundo: #ffffff;
-    --cor-borda: #cbd5e1;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- LÓGICA DE ACESSIBILIDADE: TAMANHO DA FONTE ---
+    let tamanhoFonteAtual = 100; // Porcentagem original
+    const elementoBody = document.body;
 
-/* Base */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
-}
+    document.getElementById('btn-aumentar').addEventListener('click', () => {
+        if (tamanhoFonteAtual < 140) { // Limite máximo para não quebrar o layout
+            tamanhoFonteAtual += 10;
+            elementoBody.style.fontSize = tamanhoFonteAtual + '%';
+        }
+    });
 
-/* Barra de Acessibilidade fixa no topo */
-.barra-acessibilidade {
-    background-color: #1e293b;
-    padding: 10px;
-    text-align: right;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+    document.getElementById('btn-diminuir').addEventListener('click', () => {
+        if (tamanhoFonteAtual > 80) { // Limite mínimo
+            tamanhoFonteAtual -= 10;
+            elementoBody.style.fontSize = tamanhoFonteAtual + '%';
+        }
+    });
 
-.barra-acessibilidade button {
-    background-color: #334155;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    margin-left: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 4px;
-}
+    // --- LÓGICA DE ACESSIBILIDADE: ALTO CONTRASTE ---
+    const btnContraste = document.getElementById('btn-contraste');
+    btnContraste.addEventListener('click', () => {
+        elementoBody.classList.toggle('alto-contraste');
+    });
 
-.barra-acessibilidade button:hover, 
-.barra-acessibilidade button:focus {
-    background-color: var(--cor-principal);
-    outline: 2px solid #fff;
-}
+    // --- LÓGICA DO MINI QUIZ EDUCATIVO ---
+    const btnEnviarQuiz = document.getElementById('btn-enviar-quiz');
+    const areaResultado = document.getElementById('resultado-quiz');
 
-/* Cabeçalho */
-.header-principal {
-    background-color: var(--cor-principal);
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-}
+    btnEnviarQuiz.addEventListener('click', () => {
+        const form = document.getElementById('form-quiz');
+        
+        // Captura as respostas selecionadas
+        const r1 = form.elements['p1'].value;
+        const r2 = form.elements['p2'].value;
+        const r3 = form.elements['p3'].value;
 
-.header-principal h1 {
-    margin: 0 0 10px 0;
-    font-size: 2.5rem;
-}
+        // Validação se o usuário respondeu todas as perguntas
+        if (!r1 || !r2 || !r3) {
+            areaResultado.className = "resultado-visivel";
+            areaResultado.style.backgroundColor = "#ffebee";
+            areaResultado.style.borderColor = "#c62828";
+            areaResultado.style.color = "#c62828";
+            areaResultado.innerHTML = "<strong>Atenção:</strong> Por favor, responda todas as perguntas antes de enviar.";
+            return;
+        }
 
-/* Container de Conteúdo */
-.conteudo-principal {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
+        // Contagem de acertos
+        let acertos = 0;
+        if (r1 === 'correta') acertos++;
+        if (r2 === 'correta') acertos++;
+        if (r3 === 'correta') acertos++;
 
-/* Estilo do Manual */
-.secao-manual h2, .secao-quiz h2 {
-    color: var(--cor-principal);
-    border-bottom: 3px solid var(--cor-principal);
-    padding-bottom: 10px;
-}
+        // Criação da explicação detalhada pedagógica
+        let feedbackHTML = `<h3>Você acertou ${acertos} de 3 perguntas!</h3><hr>`;
+        
+        // Feedback Pergunta 1
+        if (r1 === 'correta') {
+            feedbackHTML += `<p>✅ <strong>Pergunta 1 (Correta):</strong> Exato! A rotação de culturas quebra a reprodução de pragas específicas e melhora a química natural do solo.</p>`;
+        } else {
+            feedbackHTML += `<p>❌ <strong>Pergunta 1 (Incorreta):</strong> A resposta certa explicava que a rotação serve para quebrar o ciclo de pragas e proteger o solo através da biodiversidade.</p>`;
+        }
 
-.introducao {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-}
+        // Feedback Pergunta 2
+        if (r2 === 'correta') {
+            feedbackHTML += `<p>✅ <strong>Pergunta 2 (Correta):</strong> Perfeito. No MIP, o controle biológico (usar a própria natureza) vem sempre primeiro.</p>`;
+        } else {
+            feedbackHTML += `<p>❌ <strong>Pergunta 2 (Incorreta):</strong> Lembre-se: O MIP foca no equilíbrio. Defensivos químicos são usados apenas em último caso, nunca como primeira opção.</p>`;
+        }
 
-.card-diretriz {
-    background-color: var(--cor-card-fundo);
-    border-left: 5px solid var(--cor-principal);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
+        // Feedback Pergunta 3
+        if (r3 === 'correta') {
+            feedbackHTML += `<p>✅ <strong>Pergunta 3 (Correta):</strong> Excelente! Integrar floresta, pasto e plantação (ILPF) recupera solos degradados e gera bem-estar animal.</p>`;
+        } else {
+            feedbackHTML += `<p>❌ <strong>Pergunta 3 (Incorreta):</strong> O erro aqui foi ignorar que o ILPF une as frentes produtivas na mesma área justamente para criar benefícios mútuos e capturar carbono.</p>`;
+        }
 
-.card-diretriz h3 {
-    margin-top: 0;
-    color: #1b5e20;
-}
+        // Aplica os estilos normais de sucesso e exibe o painel
+        areaResultado.className = "resultado-visivel";
+        areaResultado.style.backgroundColor = "#e8f5e9";
+        areaResultado.style.borderColor = "#2e7d32";
+        areaResultado.style.color = "#1b5e20";
+        areaResultado.innerHTML = feedbackHTML;
 
-/* Estilo do Quiz */
-.pergunta-bloco {
-    background-color: var(--cor-card-fundo);
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid var(--cor-borda);
-}
+        // Move o foco para o resultado (ajuda usuários com leitores de tela)
+        areaResultado.scrollIntoView({ behavior: 'smooth' });
+    });
+});
 
-.enunciado {
-    margin-top: 0;
-    display: block;
-}
-
-label {
-    display: block;
-    margin: 10px 0;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 4px;
-    background-color: #f8fafc;
-}
-
-label:hover {
-    background-color: #e2e8f0;
-}
-
-input[type="radio"] {
-    margin-right: 10px;
-    transform: scale(1.2);
-}
-
-#btn-enviar-quiz {
-    background-color: var(--cor-principal);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 100%;
-    font-weight: bold;
-}
-
-#btn-enviar-quiz:hover {
-    background-color: var(--cor-secundaria);
-}
-
-/* Área de feedback do Quiz */
-#resultado-quiz {
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 6px;
-    font-size: 1.1rem;
-}
-
-.resultado-oculto {
-    display: none;
-}
-
-.resultado-visivel {
-    display: block;
-    background-color: #e8f5e9;
-    border: 2px solid #2e7d32;
-    color: #1b5e20;
-}
-
-/* --- CLASSE DE ALTO CONTRASTE (Ativada via JS) --- */
-body.alto-contraste {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-}
-
-body.alto-contraste .header-principal,
-body.alto-contraste #btn-enviar-quiz {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border: 2px solid #000;
-}
-
-body.alto-contraste .card-diretriz, 
-body.alto-contraste .pergunta-bloco,
-body.alto-contraste label {
-    background-color: #121212 !important;
-    color: #ffffff !important;
-    border: 1px solid #ffffff !important;
-}
-
-body.alto-contraste h2, 
-body.alto-contraste h3 {
-    color: #ffff00 !important; /* Amarelo para destacar títulos no contraste */
-}
-
-/* Rodapé */
-.rodape {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    background-color: #1e293b;
-    color: #94a3b8;
-    font-size: 0.9rem;
-}
