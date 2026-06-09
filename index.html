@@ -1,42 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Agro Sustentável & Futuro</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #2d3436; background: #f9fbf9; padding: 20px; transition: 0.2s; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; border-left: 8px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .acessibilidade { margin-bottom: 20px; text-align: right; }
-        button { background: #2ecc71; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #27ae60; }
-        .quiz { background: #e8f5e9; padding: 20px; border-radius: 10px; margin-top: 20px; }
-        #feedback { font-weight: bold; margin-top: 10px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Forte & Sustentável</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="acessibilidade">
-            <span>Tamanho da letra: </span>
-            <button onclick="mudarFonte(2)">A+</button>
-            <button onclick="mudarFonte(-2)">A-</button>
-        </div>
+
+    <div class="barra-acessibilidade" role="complementary" aria-label="Ferramentas de Acessibilidade">
+        <button id="btn-aumentar" aria-label="Aumentar texto">A+</button>
+        <button id="btn-diminuir" aria-label="Diminuir texto">A-</button>
+        <button id="btn-contraste" aria-label="Alternar Alto Contraste">Alternar Contraste</button>
+    </div>
+
+    <header class="header-principal">
+        <h1>Agro Forte: O Futuro Sustentável</h1>
+        <p>O equilíbrio vital entre a produtividade no campo e a preservação do meio ambiente.</p>
+    </header>
+
+    <main class="conteudo-principal">
         
-        <h1>Manual: Agro Forte e Sustentável</h1>
-        <p>A produção sustentável une tecnologia AgTech e preservação. O uso de drones e sensores permite o equilíbrio entre produtividade e meio ambiente.</p>
-        
-        <div class="quiz">
-            <h3>Mini Quiz Tecnológico</h3>
-            <p>Qual tecnologia ajuda a economizar água e defensivos?</p>
-            <button onclick="verificar(true)">Drones e Sensores</button>
-            <button onclick="verificar(false)">Arados Tradicionais</button>
-            <div id="feedback"agoraComputedStyle(document.body).fontSize;
-            document.body.style.fontSize = (parseFloat(s) + n) + 'px';
-        }
-        function verificar(c) {
-            const f = document.getElementById('feedback');
-            f.innerText = c ? "Correto! 🌱" : "Tente novamente! ❌";
-            f.style.color = c ? "#27ae60" : "#e74c3c";
-        }
-    </script>
+        <section id="manual" class="secao-manual" aria-labelledby="titulo-manual">
+            <h2 id="titulo-manual">Manual da Produção Sustentável</h2>
+            <p class="introducao">Produzir em larga escala sem esgotar os recursos naturais é o maior desafio e oportunidade do agro moderno. Abaixo, entenda os pilares práticos dessa revolução:</p>
+            
+            <div class="card-diretriz">
+                <h3>1. Rotação de Culturas e Plantio Direto</h3>
+                <p>Em vez de plantar a mesma cultura ano após ano, a rotação (alternar milho, soja e pastagem, por exemplo) quebra o ciclo de pragas e enriquece o solo naturalmente. O Plantio Direto evita revirar a terra, mantendo a palhada anterior para proteger o solo contra erosão e reter água.</p>
+            </div>
+
+            <div class="card-diretriz">
+                <h3>2. Manejo Integrado de Pragas (MIP)</h3>
+                <p>O MIP prioriza o uso de inimigos naturais (insetos benéficos) e armadilhas biológicas para controlar lagartas e percevejos. O defensivo químico só é utilizado em último caso e de forma cirúrgica, reduzindo drasticamente a contaminação do solo e dos lençóis freáticos.</p>
+            </div>
+
+            <div class="card-diretriz">
+                <h3>3. Gestão Hídrica e Irrigação Inteligente</h3>
+                <p>Sistemas modernos como o gotejamento e pivôs centrais com sensores de umidade garantem que a planta receba exatamente a quantidade de água necessária, evitando o desperdício severo de recursos hídricos.</p>
+            </div>
+
+            <div class="card-diretriz">
+                <h3>4. Integração Lavoura-Pecuária-Floresta (ILPF)</h3>
+                <p>Uma estratégia que associa a produção de grãos, carne (ou leite) e madeira em uma mesma área. As árvores trazem sombra para o gado, retêm carbono da atmosfera e protegem o solo, gerando uma sinergia ambiental perfeita.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="quiz" class="secao-quiz" aria-labelledby="titulo-quiz">
+            <h2 id="titulo-quiz">💡 Desafio do Agro Sustentável (Mini Quiz)</h2>
+            <p>Teste seus conhecimentos com base no manual acima e aprenda ainda mais!</p>
+
+            <form id="form-quiz">
+                <div class="pergunta-bloco">
+                    <p class="enunciado"><strong>1. Qual é o principal objetivo da Rotação de Culturas?</strong></p>
+                    <label><input type="radio" name="p1" value="errada1"> Esgotar os nutrientes do solo mais rápido.</label>
+                    <label><input type="radio" name="p1" value="correta"> Quebrar o ciclo de pragas e enriquecer o solo naturalmente.</label>
+                    <label><input type="radio" name="p1" value="errada2"> Facilitar apenas o uso de tratores pesados.</label>
+                </div>
+
+                <div class="pergunta-bloco">
+                    <p class="enunciado"><strong>2. O que caracteriza o Manejo Integrado de Pragas (MIP)?</strong></p>
+                    <label><input type="radio" name="p2" value="errada1"> O uso massivo e diário de agrotóxicos.</label>
+                    <label><input type="radio" name="p2" value="errada2"> A eliminação de todas as árvores ao redor da plantação.</label>
+                    <label><input type="radio" name="p2" value="correta"> O uso prioritário de controle biológico e aplicação química apenas em último caso.</label>
+                </div>
+
+                <div class="pergunta-bloco">
+                    <p class="enunciado"><strong>3. Qual o benefício do sistema ILPF (Integração Lavoura-Pecuária-Floresta)?</strong></p>
+                    <label><input type="radio" name="p3" value="correta"> Combinar grãos, gado e árvores na mesma área, gerando sombra e capturando carbono.</label>
+                    <label><input type="radio" name="p3" value="errada1"> Isolar completamente a produção agrícola da criação de animais.</label>
+                    <label><input type="radio" name="p3" value="errada2"> Aumentar o desmatamento para abrir novos pastos degradados.</label>
+                </div>
+
+                <button type="button" id="btn-enviar-quiz">Enviar Respostas</button>
+            </form>
+
+            <div id="resultado-quiz" class="resultado-oculto" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>&copy; 2026 - Agro Forte & Futuro Sustentável. Desenvolvido com foco em acessibilidade e educação.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
